@@ -22,9 +22,7 @@ if not limit:
 	console.alert("DRC by GoDzM4TT3O", "Please enter a numeric comment limit. For example, if I want to download my last 10 comments this week, I will choose 'week' as comment frequency, and 10 as comment limit.")
 	
 rawu = console.input_alert("DRC by GoDzM4TT3O", "Please enter a valid Reddit username of your choice to download their " + limit + " comments with the frequency: " + freq)
-user = rawu
-if ' ' in user:
-	user = user.replace(" ", "")
+user = rawu.replace(" ", "")
 	
 # fun fact! if below line is commented, the program will fetch random usernames!
 
