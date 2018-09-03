@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# TODO: use utf-8 instead of ascii
 # DownloadRedditComments by GoDzM4TT3O & cclauss
 # I worked really hard on this, unicode errors and that stuff. The program would throw an error because of unicode characters. in my case I had \u2019 in my comments, now problem is fixed. THANK GOD.
 from __future__ import print_function, absolute_import
