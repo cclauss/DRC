@@ -29,4 +29,4 @@ Enter a comment frequency, for example I will type 'day';
 
 - [x] Fix whitespace error in name (if there were any spaces in the username it wouldn't work)
 
-- [ ] Fix 'b' before comment body (b'comment')
+- [x] Fix 'b' before comment body (b'comment')
