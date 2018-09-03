@@ -6,18 +6,11 @@
 
 import console, json, urllib.request, time, re, unicodedata
 
-freq = console.input_alert("DRC by GoDzM4TT3O", "Please enter a comment frequency. Choose one of these:\n\nday\nweek\nmonth\nyear")
-
-if freq == 'day':
-	freq = 'day'
-elif freq == 'week':
-	freq = 'week'
-elif freq == 'month':
-	freq = 'month'
-elif freq == 'year':
-	freq = 'year'
-else:
-	console.alert("DRC by GoDzM4TT3O", "Choose a valid comment frequency.\nList of valid post frequencies:\n\nday\n\nweek\n\nmonth\n\nyear")
+freq = None
+while freq not in ('day', 'week', 'month', 'year'):
+	freq = console.input_alert("DRC by GoDzM4TT3O",
+				   "Please enter a comment frequency. Choose one of "
+				   "these:\n\nday\nweek\nmonth\nyear").strip().lower()
 	
 limit = console.input_alert("DRC by GoDzM4TT3O", "How many comments would you like to download? [Example: 50]\nMUST BE 10 or more.")
 
@@ -43,10 +36,9 @@ if not user:
 
 subreddit = console.input_alert("DRC by GoDzM4TT3O", "[OPTIONAL] Enter a subreddit you'd like to download comments from.\nIf no subreddit is defined, you'll only download " + limit + " comments made by " + user + " with this frequency: " + freq + " in every subreddit they commented.\nIn alternative, if a subreddit is provided, you'll download " + user + "'s comments in the provided subreddit, if the user and the subreddit are valid.")
 
-if not subreddit:
-	apiurl = "https://api.pushshift.io/reddit/comment/search?author=" + user + "&frequency=" + freq + "&limit=" + limit
-else:
-	apiurl = "https://api.pushshift.io/reddit/comment/search?author=" + user + "&frequency=" + freq + "&limit=" + limit + "&subreddit=" + subreddit
+apiurl = "https://api.pushshift.io/reddit/comment/search?author=" + user + "&frequency=" + freq + "&limit=" + limit
+if subreddit:
+	apiurl += "&subreddit=" + subreddit
 
 with urllib.request.urlopen(apiurl) as url:
 	data = json.loads(url.read().decode())
