@@ -19,7 +19,7 @@ elif freq == 'year':
 else:
 	console.alert("DRC by GoDzM4TT3O", "Choose a valid comment frequency.\nList of valid post frequencies:\n\nday\n\nweek\n\nmonth\n\nyear")
 	
-limit = console.input_alert("DRC by GoDzM4TT3O", "How many comments would you like to download? [Example: 50]\nMUST BE 10 or more.")
+limit = console.input_alert("DRC by GoDzM4TT3O", "How many comments would you like to download? [Example: 50]\nMUST BE 10 or more.", "10")
 
 nums = re.compile("^[\-]?[1-9][0-9]*\.?[0-9]+$")
 isnum = re.match(nums, limit)
@@ -54,12 +54,12 @@ with urllib.request.urlopen(apiurl) as url:
 		print(("\nDRC by GoDzM4TT3O\n\nERROR: The specified user", user, "doesn't exist."))
 		
 ## Made  by  GoDzM4TT3O
-outname = user + '-log.DRC.txt'
+outname = user + '.DRC.txt'
 for element in data['data']:
 
 	author = element['author']
 	contentold = element[u'body']
-	content = unicodedata.normalize('NFKD', contentold).encode('ascii','ignore')
+	content = unicodedata.normalize('NFKD',  contentold).encode('ascii', 'ignore').decode()
 	permalink = element['permalink']
 	upvotes = element['score']
 	issticky = element['stickied']
@@ -68,3 +68,4 @@ for element in data['data']:
 	date = time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(unix_date))
 
 	print("\nAuthor:\n", author, "\n\nComment content:\n", content, "\n\nPermalink:\n", permalink, "\n\nUpvotes:\n", upvotes, "\n\nIs sticky post:\n", issticky, "\nSubreddit:\n", sub, "\n\nPosted on:\nUnix date:\n", unix_date, "\nDate (DD/MM/YYYY):\n", date, "\n\n--------------------\n\n", file=open(outname, "a"))
+# Made by GoDzM4TT3O
