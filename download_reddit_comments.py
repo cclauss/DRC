@@ -4,7 +4,7 @@
 # DownloadRedditComments by GoDzM4TT3O & cclauss
 # I worked really hard on this, unicode errors and that stuff. The program would throw an error because of unicode characters. in my case I had \u2019 in my comments, now problem is fixed. THANK GOD.
 from __future__ import print_function, absolute_import
-import console, json, requests, time, re, unicodedata
+import console, re, requests, time, unicodedata
 
 freq = None
 while freq not in ('day', 'week', 'month', 'year'):
@@ -36,9 +36,8 @@ apiurl = "https://api.pushshift.io/reddit/comment/search?author=" + user + "&fre
 if subreddit:
 	apiurl += "&subreddit=" + subreddit
 	
-response = requests.get(apiurl)
-data = json.loads(response.text)
-if not data['data']:
+data = requests.get(apiurl).json()
+if not data.get('data'):
 	print(("\nDRC by GoDzM4TT3O\n\nERROR: The specified user", user, "doesn't exist."))
 	
 ## Made  by  GoDzM4TT3O & cclauss
