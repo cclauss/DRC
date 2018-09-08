@@ -31,4 +31,6 @@ Enter a comment frequency, for example I will type 'day';
 
 - [x] Fix 'b' before comment body (b'comment')
 
+- [x] Make code more readable (thanks to cclauss)
+
 - [ ] Use UTF-8 instead of ASCII
