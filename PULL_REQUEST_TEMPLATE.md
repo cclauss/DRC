@@ -14,7 +14,7 @@ Example: I added this feature that allows...
 
 Example: there was a bug while trying to ...
 
-**Link to your forked project:**
+**Link to your forked project (optional) :**
 
 Example: https://github.com/your-username-here/DRC
 
