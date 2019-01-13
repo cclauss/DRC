@@ -52,7 +52,7 @@ subreddit = console.input_alert("DRC by GoDzM4TT3O",
                                 "\nIf no subreddit is defined, you'll only download "
                                 + limit + " comments made by "
                                 + user + " with this frequency: "
-                                freq + " in every subreddit they commented."
+                                + freq + " in every subreddit they commented."
                                 "\nIn alternative, if a subreddit is provided, you'll download "
                                 + user + "'s comments in the provided subreddit, if the user and the subreddit are valid.")
 
