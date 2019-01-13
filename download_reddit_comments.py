@@ -8,35 +8,24 @@
 # THANK GOD.
 
 from __future__ import print_function, absolute_import
-import console, re, requests, time, unicodedata
+import re, requests, time, unicodedata
+
+print("\n     DRC by GoDzM4TT3O . Contribute:")
+print("    https://github.com/GoDzM4TT3O/DRC")
 
 freq = None
-while freq not in ('day', 'week', 'month', 'year'):
-	freq = console.input_alert("DRC by GoDzM4TT3O",
-	"Please enter a comment frequency. Choose one of "
-	"these:\n\nday\nweek\nmonth\nyear").strip().lower()
+while freq not in ('DAY', 'WEEK', 'MONTH', 'YEAR'):
+	freq = input("\nPlease enter a comment frequency: [DAY/WEEK/MONTH/YEAR]\n> ").strip().upper()
 	
-limit = console.input_alert("DRC by GoDzM4TT3O", 
-                            "How many comments would you like to download? "
-                            + "[Example: 50]\nMUST BE 10 or more.", "10")
-
-nums = re.compile("^[\-]?[1-9][0-9]*\.?[0-9]+$")
-isnum = re.match(nums, limit)
-if not isnum:
-	console.alert("DRC by GoDzM4TT3O",
-	"Please enter a numeric comment limit."
-	"For example, if I want to download my last 10 comments this week, "\
-	"I will choose 'week' as comment frequency, and 10 as comment limit.")
+isnum = 0
+while not isnum:
+        limit = input("\nHow many comments would you like to download? [>=10]\n> ")
+        nums = re.compile("^[\-]?[1-9][0-9]*\.?[0-9]+$")
+        isnum = re.match(nums, limit)
 	
-if not limit:
-	console.alert("DRC by GoDzM4TT3O",
-	"Please enter a numeric comment limit."
-	"For example, if I want to download my last 10 comments this week, "
-	"I will choose 'week' as comment frequency, and 10 as comment limit.")
-	
-rawu = console.input_alert("DRC by GoDzM4TT3O", \
-                           "Please enter a valid Reddit username of your choice to download their "
-                           + limit + " comments with the frequency: " + freq)
+rawu = input("\nPlease enter a valid Reddit username of your choice\n"
+             "to download their " + limit + " comments with this frequency: " + freq +
+             "\n> /u/")
 user = rawu.replace(" ", "")
 
 # fun fact!
@@ -44,17 +33,16 @@ user = rawu.replace(" ", "")
 # the program will fetch random usernames!
 
 if not user:
-	console.alert("DRC by GoDzM4TT3O",
-	"Please enter a valid username.")
+	user = input("\nPlease enter a valid username:  ")
 	
-subreddit = console.input_alert("DRC by GoDzM4TT3O",
-                                "[OPTIONAL] Enter a subreddit you'd like to download comments from."
-                                "\nIf no subreddit is defined, you'll only download "
-                                + limit + " comments made by "
-                                + user + " with this frequency: "
-                                + freq + " in every subreddit they commented."
-                                "\nIn alternative, if a subreddit is provided, you'll download "
-                                + user + "'s comments in the provided subreddit, if the user and the subreddit are valid.")
+subreddit = input("\n[OPTIONAL] Enter subreddit you'd like to download comments from."
+                  "\nIf no subreddit is defined, you'll download\n        "
+                  + limit + " comments\nmade by\n        /u/"
+                  + user + "\nwith this frequency:\n           "
+                  + freq + "\nin every subreddit they have commented."
+                  "\nAlternatively, you'll download /u/"
+                  + user + " comments in the provided subreddit\nif the username and subreddit are valid.\n"
+                  "> /r/")
 
 apiurl = "https://api.pushshift.io/reddit/comment/search?author=" + user + "&frequency=" + freq + "&limit=" + limit
 if subreddit:
@@ -62,8 +50,18 @@ if subreddit:
 	
 data = requests.get(apiurl).json()
 if not data.get('data'):
-	print(("\nDRC by GoDzM4TT3O\n\nERROR: The specified user",
-	user, "doesn't exist."))
+	print("\n\nERROR: Cannot collect any data! Please make sure the specified values like\n"
+              "        /u/" + user + "\nand [OPTIONAL]\n        /r/" + subreddit + "\nare valid.\n"
+              "If they are - we just have not obtained any comments; are there any?\n")
+else:
+        print("\n\nDownloading...\n"
+              "NOTE: If you'll get \"KeyError: 'permalink'\",\n"
+              "      most likely " + limit + " comments number is too high\n"
+              "      - more than this user has ever posted! Try lowering it, or just use\n"
+              "https://atomiks.github.io/reddit-user-analyser/\n"
+              "      to find out how many comments this user has\n"
+              "      and specify this number to get them all;\n"
+              "      although in my case I can't get > 346/367\n")
 	
 ## Made  by  GoDzM4TT3O & cclauss
 outname = user + '.DRC.txt'
@@ -91,3 +89,7 @@ for element in data['data']:
 	date, "\n\n--------------------\n\n",
 	file=open(outname, "a"))
 # Made by GoDzM4TT3O & cclauss
+
+print("\n      COMPLETED! This is wonderful")
+print("     DRC by GoDzM4TT3O . Contribute:")
+print("    https://github.com/GoDzM4TT3O/DRC\n")
